@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    // Display all tasks
     public function index()
     {
         $tasks = Task::orderBy('created_at', 'desc')->get();
         return view('tasks.index', compact('tasks'));
     }
 
-    // Store new task (CREATE)
     public function store(Request $request)
     {
         $request->validate([
@@ -31,7 +29,6 @@ class TaskController extends Controller
         return redirect()->back()->with('success', 'Task added successfully!');
     }
 
-    // Update task (UPDATE)
     public function update(Request $request, $id)
     {
         $task = Task::findOrFail($id);
@@ -49,7 +46,6 @@ class TaskController extends Controller
         return redirect()->back()->with('success', 'Task updated successfully!');
     }
 
-    // Update status
     public function updateStatus(Request $request, $id)
     {
         $task = Task::findOrFail($id);
@@ -58,7 +54,6 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-    // Delete task (DELETE)
     public function destroy($id)
     {
         $task = Task::findOrFail($id);
